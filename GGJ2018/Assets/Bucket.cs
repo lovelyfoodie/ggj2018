@@ -7,6 +7,8 @@ using System;
 public class Bucket : MonoBehaviour {
 
 	//TODO: Take in gate collider object in the 
+	[SerializeField]
+	private String activation_key = "Fire1";
 
 	private Color BLUE = Color.blue;
 	private Color RED = Color.red;
@@ -23,11 +25,11 @@ public class Bucket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("Fire1") && isBlue) {
+		if (Input.GetButtonDown (activation_key) && isBlue) {
 			gateSprite.color = RED;
 			gate.layer = 8;
 			isBlue = false;
-		} else if(Input.GetButtonDown ("Fire1") && !isBlue) {
+		} else if(Input.GetButtonDown (activation_key) && !isBlue) {
 			gateSprite.color = BLUE;
 			gate.layer = 9;
 			isBlue = true;
