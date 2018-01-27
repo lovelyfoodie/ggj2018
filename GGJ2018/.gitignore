@@ -32,3 +32,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Wwise
+/GGJ2018_WwiseProject/Originals/SFX/*.akd
+/GGJ2018_WwiseProject/.cache/
+Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset
