@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class Bucket : MonoBehaviour {
+public class Gates : MonoBehaviour {
 
 	//TODO: Take in gate collider object in the 
 	[SerializeField]
