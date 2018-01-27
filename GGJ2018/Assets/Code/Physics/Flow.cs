@@ -5,10 +5,8 @@ using UnityEngine.Serialization;
 public class Flow : MonoBehaviour
 {
     public Vector3 direction;
-    [FormerlySerializedAs("force")]
-    public float strength = 1f;
-    public float effectRadius;
-    public AnimationCurve effectFalloff;
+
+    public FlowData data;
 
     public int id;
     private FlowDirector _director;
@@ -28,11 +26,16 @@ public class Flow : MonoBehaviour
 
     //--------------------------------------------------------
 
+
+    private void Awake()
+    {
+        RefreshCollider();
+    }
+
     private void OnValidate()
     {
         _collider = GetComponent<CircleCollider2D>();
-        //TODO, make this in a managed linked list and have them push force towards next in list. if branching, average vector
-
+        RefreshCollider();
         Recalculate();
     }
 
@@ -41,8 +44,13 @@ public class Flow : MonoBehaviour
         var cell = other.GetComponent<Cell>();
         if (cell)
         {
-            cell.AddForce(direction.normalized * strength); //TODO add rolloff
+            cell.AddForce(direction.normalized * data.strength); //TODO add rolloff
         }
+    }
+
+    private void RefreshCollider()
+    {
+        _collider.radius = data.effectRadius;
     }
 
     private void Recalculate()
@@ -68,12 +76,16 @@ public class Flow : MonoBehaviour
     {
         // Draw effect radius.
         Gizmos.color = new Color(1, 0, 0, 0.5f);
-        Gizmos.DrawSphere(transform.position, effectRadius);
+        if (Director.end.Equals(this))
+        {
+            Gizmos.color = new Color(0, 1, 0, 0.5f);
+        }
+        Gizmos.DrawSphere(transform.position, data.effectRadius);
 
         // Draw force vector.
         Recalculate();
-        Gizmos.color = new Color(0, 0, strength / 10f, 1f);
-        Gizmos.DrawLine(transform.position, transform.position + direction.normalized * effectRadius);
+        Gizmos.color = new Color(0, 0, data.strength / 10f, 1f);
+        Gizmos.DrawLine(transform.position, transform.position + direction.normalized * data.effectRadius);
     }
 
 
@@ -85,7 +97,7 @@ public class Flow : MonoBehaviour
         flow.id = Director.iter;
 
         go.name = "Flow" + Director.iter + " (parent = Flow" + id + ")";
-        go.transform.position = transform.position + direction.normalized * effectRadius * 1.5f;
+        go.transform.position = transform.position + direction.normalized * data.effectRadius * 1.5f;
         go.transform.parent = transform.parent;
 
         flow.direction = direction;
@@ -112,5 +124,7 @@ public class Flow : MonoBehaviour
             flow.prev = prev;
             prev.next.Add(flow);
         }
+
+        DestroyImmediate(gameObject);
     }
 }
