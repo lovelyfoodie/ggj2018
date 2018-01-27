@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
 {
     public float startingTorque = 1f;
     public float maxSpeed = 1f;
+    public float maxSpeedVariation = 0.2f;
 
     private Rigidbody2D _rb;
     private float _sqrMagMaxSpeed;
@@ -18,12 +19,18 @@ public class Cell : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _rb.AddTorque(Random.Range(0, startingTorque));
 
-        _sqrMagMaxSpeed = maxSpeed * maxSpeed;
+        SetMaxSpeed();
     }
 
     private void OnValidate()
     {
-        _sqrMagMaxSpeed = maxSpeed * maxSpeed;
+        SetMaxSpeed();
+    }
+
+    private void SetMaxSpeed()
+    {
+        var speed = maxSpeed + Random.Range(-maxSpeedVariation, maxSpeedVariation);
+        _sqrMagMaxSpeed = speed * speed;
     }
 
     private void FixedUpdate()
