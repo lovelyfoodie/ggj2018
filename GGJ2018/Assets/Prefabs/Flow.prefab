@@ -55,7 +55,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
 --- !u!114 &114785125488006698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -68,26 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: -0.45447037, y: -0.8907619, z: 0}
-  strength: 1.5
-  effectRadius: 1
-  effectFalloff:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: -2.8634114
-      outSlope: -2.8634114
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.9970824
-      value: -0.0000002689776
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
+  data: {fileID: 11400000, guid: 67af0b2b319edb84faa43642f61b3472, type: 2}
   id: 0
   prev: {fileID: 0}
   next: []
