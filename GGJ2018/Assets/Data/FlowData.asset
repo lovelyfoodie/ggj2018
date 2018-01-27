@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e26df0ff16b6b34896dd8fe92c81d08, type: 3}
   m_Name: FlowData
   m_EditorClassIdentifier: 
-  strength: 1.5
+  strength: 0.7
   effectRadius: 2
   effectFalloff:
     serializedVersion: 2

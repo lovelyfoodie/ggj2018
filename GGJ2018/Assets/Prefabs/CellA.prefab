@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingTorque: 0.1
+  maxSpeed: 1
 --- !u!212 &212422513393346224
 SpriteRenderer:
   m_ObjectHideFlags: 1
