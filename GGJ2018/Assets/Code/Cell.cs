@@ -10,6 +10,7 @@ public class Cell : MonoBehaviour
     public float startingTorque = 1f;
     public float maxSpeed = 1f;
     public float maxSpeedVariation = 0.2f;
+    public Entity entity;
 
     private Rigidbody2D _rb;
     private float _sqrMagMaxSpeed;
