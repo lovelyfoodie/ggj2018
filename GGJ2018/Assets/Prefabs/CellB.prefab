@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 349706b8c593d2d459489daa787349ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTorque: 0.1
+  startingTorque: 0.15
+  maxSpeed: 6
 --- !u!212 &212422513393346224
 SpriteRenderer:
   m_ObjectHideFlags: 1
