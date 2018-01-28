@@ -121,6 +121,7 @@ MonoBehaviour:
   startingTorque: 0.15
   maxSpeed: 12
   maxSpeedVariation: 3
+  entity: {fileID: 11400000, guid: 130f9d6a8abb8af48b8e37adfff89850, type: 2}
 --- !u!212 &212422513393346224
 SpriteRenderer:
   m_ObjectHideFlags: 1
