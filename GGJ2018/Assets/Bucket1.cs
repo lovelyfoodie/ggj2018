@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+using UnityEngine.Experimental.UIElements;
+using UnityEngine.Events;
 
 public class Bucket1 : MonoBehaviour {
 
@@ -12,15 +15,25 @@ public class Bucket1 : MonoBehaviour {
 
 	private BoxCollider2D collider; 
 	[SerializeField]
-	public Ojbective [] playerObjectives;
+	public Ojbective [] playerObjectives = new Ojbective[5];
+	public String playerName; 
+	public Text remainingBlues;
+	public Text remainingReds;
 	private int currObjectiveIndex = 0;
 	public int redCount = 0; 
 	public int blueCount = 0;
+	public UnityEvent OnObjectiveComplete;
+	public Objectives_Collection objectivesCollection;
 
 
 	// Use this for initialization
 	void Start () {
 		collider = GetComponent<BoxCollider2D> ();
+		for (int i = 0; i < playerObjectives.Length; i++) {
+			playerObjectives [i] = objectivesCollection.getRandom ();
+		}
+		Ojbective tempObjective = playerObjectives [currObjectiveIndex];
+		UpdateUI (tempObjective.blueCount, tempObjective.redCount, false);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {
@@ -33,6 +46,21 @@ public class Bucket1 : MonoBehaviour {
 	}
 
 	void UpdateUI(int _blueLeft, int _redLeft, bool complete){
+		remainingBlues.text = _blueLeft.ToString ();
+		remainingReds.text = _redLeft.ToString ();
+		if (complete) {
+			redCount = 0;
+			blueCount = 0;
+			if (currObjectiveIndex == playerObjectives.Length - 1) {
+				Debug.Log (playerName + " wins!");
+				OnObjectiveComplete.Invoke ();
+			} else {
+				currObjectiveIndex++;
+				Ojbective tempObjective = playerObjectives [currObjectiveIndex];
+				remainingBlues.text = tempObjective.blueCount.ToString ();
+				remainingReds.text = tempObjective.redCount.ToString ();
+			}
+		}
 	}
 
 	void CheckIfObjectiveComplete(){
@@ -43,7 +71,8 @@ public class Bucket1 : MonoBehaviour {
 		if (blueLeft == 0 && redLeft == 0) {
 			Debug.Log ("Objective " + currObjectiveIndex + " Complete");
 			UpdateUI (blueLeft, redLeft, true);
+		} else {
+			UpdateUI (blueLeft, redLeft, false);
 		}
-		UpdateUI (blueLeft,redLeft,false);
 	}
 }
